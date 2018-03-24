@@ -1,0 +1,97 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Бинарный_поиск
+{
+    class Program
+    {
+        public static int BinarySearch(int[] array, int value)
+        {
+            if (array.Length == 0 || value > array.Length - 1 || value < array[0])
+                return -1;
+            int begin = 0, end = array.Length - 1;
+            while (begin < end)
+            {
+                int middle = begin + (end - begin) / 2;
+                if (value <= array[middle])
+                {
+                    end = middle;
+                }
+                else
+                {
+                    begin = middle + 1;
+                }
+            }
+            if (array[end] == value)
+                return end;
+            else return -1;
+        }
+
+        static void Main(string[] args)
+        {
+            NegativeNumbers();
+            ElementIsNotExisted();
+            SearchInFiveElements();
+            RepeatedElement();
+            EmptyArray();
+            SearchInManyElements();
+            Console.ReadKey();
+        }
+        private static void SearchInFiveElements() //Поиск одного элемента в массиве из 5 элементов
+        {
+            int[] fiveNumbers = new[] { 1, 2, 3, 4, 5 };
+            if (BinarySearch(fiveNumbers, 2) != 1)
+                Console.WriteLine("! Число 2  отсутствует в массиве из 5 чисел { 1, 2, 3, 4, 5 }");
+            else Console.WriteLine("Поиск в массиве из 5 чисел работает корректно");
+
+        }
+        private static void NegativeNumbers() //Тестирование поиска в отрицательных числах
+        {
+            int[] negativeNumbers = new[] { -55, -41, -32, -2 };
+            if (BinarySearch(negativeNumbers, -32) != 2)
+                Console.WriteLine("! Число -3 отсутсвует среди чисел {55, -41, -32, -2}");
+            else
+                Console.WriteLine("Поиск среди отрицательных чисел работает корректно");
+        }
+        private static void ElementIsNotExisted()//Тестирование поиска отсутствующего элемента
+        {
+            int[] negativeNumbers = new[] { -5, -4, -3, -2 };
+            if (BinarySearch(negativeNumbers, -1) >= 0)
+                Console.WriteLine("!  Число -1 отсутсвует среди чисел {-5, -4, -3, -2}");
+            else
+                Console.WriteLine("Поиск отсутствующего элемента работает корректно");
+        }
+        private static void RepeatedElement() //Тестирование поиска повторяющегося элемента
+        {
+            int[] repeatNumbers = new[] { 1, 2, 2, 4, 5 };
+            if (BinarySearch(repeatNumbers, 2) != 1)
+                Console.WriteLine("! Поиск повторяющегося элемента некорректен!");
+            else
+                Console.WriteLine("Поиск повторяющегося элемента работает корректно");
+        }
+        private static void EmptyArray()//Тестирование поиска в пустом массиве
+        {
+            int[] emptyArray = { };
+            if (BinarySearch(emptyArray, 2) != -1)
+                Console.WriteLine("! Поиск элемента в пустом массиве работает некорректно!");
+            else
+                Console.WriteLine("Поиск элемента в пустом массиве работает корректно");
+        }
+        private static void SearchInManyElements() //Тестирование поиска в массиве из 100001 элементов
+        {
+            int[] manyNumbers = new int[100001];
+            for (int i = 0; i < 100001; i++)
+            {
+                manyNumbers[i] = i + 1;
+            }
+            if (BinarySearch(manyNumbers, 1000) != 999)
+                Console.WriteLine("! Поиск элемента в массиве из 100001 элементов некорректен!");
+            else
+                Console.WriteLine("Поиск в массиве из 100001 элементов работает корректно");
+        }
+    }
+
+}
