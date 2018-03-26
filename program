@@ -10,7 +10,7 @@ namespace Бинарный_поиск
     {
         public static int BinarySearch(int[] array, int value)
         {
-            if (array.Length == 0 || value > array.Length - 1 || value < array[0])
+            if (array.Length == 0 || value > array[array.Length - 1] || value < array[0])
                 return -1;
             int begin = 0, end = array.Length - 1;
             while (begin < end)
@@ -32,8 +32,8 @@ namespace Бинарный_поиск
 
         static void Main(string[] args)
         {
-            NegativeNumbers();
-            ElementIsNotExisted();
+           NegativeNumbers();
+           ElementIsNotExisted();
             SearchInFiveElements();
             RepeatedElement();
             EmptyArray();
@@ -42,8 +42,8 @@ namespace Бинарный_поиск
         }
         private static void SearchInFiveElements() //Поиск одного элемента в массиве из 5 элементов
         {
-            int[] fiveNumbers = new[] { 1, 2, 3, 4, 5 };
-            if (BinarySearch(fiveNumbers, 2) != 1)
+            int[] fiveNumbers = new[] { 11, 22, 33, 41, 52 };
+            if (BinarySearch(fiveNumbers, 22) != 1)
                 Console.WriteLine("! Число 2  отсутствует в массиве из 5 чисел { 1, 2, 3, 4, 5 }");
             else Console.WriteLine("Поиск в массиве из 5 чисел работает корректно");
 
